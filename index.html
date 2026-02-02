@@ -1,108 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For You 💖</title>
 
 <style>
-  body {
-    height: 100vh;
-    margin: 0;
-    background: linear-gradient(-45deg, #ff0844, #ff5f6d, #ff758c, #ffb199);
-    background-size: 400% 400%;
-    animation: bg 12s ease infinite;
-    font-family: "Poppins", sans-serif;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
+:root {
+  --glass: rgba(255,255,255,0.18);
+  --accent: #ff2f6d;
+}
 
-  @keyframes bg {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .card {
-    position: relative;
-    backdrop-filter: blur(16px);
-    background: rgba(255,255,255,0.15);
-    border-radius: 24px;
-    padding: 35px 30px 45px;
-    width: 90%;
-    max-width: 420px;
-    min-height: 420px;
-    text-align: center;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
-    overflow: hidden;
-  }
+body {
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(-45deg, #ff0844, #ff5f6d, #ff758c, #ffb199);
+  background-size: 400% 400%;
+  animation: bg 12s ease infinite;
+  font-family: "Poppins", system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
 
-  h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
+@keyframes bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  #openBtn {
-    position: absolute;
-    padding: 16px 40px;
-    font-size: 22px;
-    border: none;
-    border-radius: 18px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #ff003c, #ff8a00);
-    color: white;
-    box-shadow: 0 10px 0 #9b0033, 0 0 20px rgba(255,0,60,0.8);
-    animation: pulse 1.5s infinite;
-    transition: left 0.25s ease, top 0.25s ease;
-    user-select: none;
-  }
+.card {
+  position: relative;
+  width: min(92vw, 420px);
+  height: min(80vh, 460px);
+  padding: 28px 22px 40px;
+  text-align: center;
+  backdrop-filter: blur(18px);
+  background: var(--glass);
+  border-radius: 26px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
 
-  @keyframes pulse {
-    0% { box-shadow: 0 0 12px rgba(255,0,60,0.6); }
-    50% { box-shadow: 0 0 28px rgba(255,0,60,1); }
-    100% { box-shadow: 0 0 12px rgba(255,0,60,0.6); }
-  }
+h1 {
+  font-size: 1.7rem;
+  margin-bottom: 22px;
+}
 
-  #message {
-    display: none;
-    font-size: 26px;
-    margin-top: 15px;
-    animation: pop 0.6s ease forwards;
-  }
+#openBtn {
+  position: absolute;
+  padding: 15px 38px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ff003c, #ff8a00);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 0 #9b0033;
+  animation: pulse 1.6s infinite;
+  transition:
+    left 0.35s cubic-bezier(.34,1.56,.64,1),
+    top 0.35s cubic-bezier(.34,1.56,.64,1),
+    transform 0.15s ease;
+}
 
-  #meme {
-    display: none;
-    margin-top: 22px;
-    width: 100%;
-    max-width: 320px;
-    border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
-    animation: fade 0.8s ease forwards;
-  }
+#openBtn:active {
+  transform: scale(0.95);
+}
 
-  @keyframes pop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+@keyframes pulse {
+  0% { box-shadow: 0 0 12px rgba(255,0,60,.6); }
+  50% { box-shadow: 0 0 28px rgba(255,0,60,1); }
+  100% { box-shadow: 0 0 12px rgba(255,0,60,.6); }
+}
 
-  @keyframes fade {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+#message {
+  display: none;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  animation: pop 0.6s ease forwards;
+}
 
-  .heart {
-    position: fixed;
-    color: rgba(255,255,255,0.8);
-    animation: floatUp 6s linear infinite;
-    pointer-events: none;
-  }
+#meme {
+  display: none;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 18px;
+  animation: fade 0.8s ease forwards;
+  box-shadow: 0 18px 45px rgba(0,0,0,.45);
+}
 
-  @keyframes floatUp {
-    from { transform: translateY(100vh); opacity: 0; }
-    to { transform: translateY(-10vh); opacity: 1; }
+@keyframes pop {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade {
+  from { transform: translateY(25px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.heart {
+  position: fixed;
+  bottom: -40px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
   }
+}
 </style>
 </head>
 
@@ -110,7 +128,6 @@
 
 <div class="card">
   <h1>Hey Valentine 💘</h1>
-
   <button id="openBtn">OPEN (15)</button>
 
   <div id="message">
@@ -123,118 +140,94 @@
     alt="Monkey Meme">
 </div>
 
-<!-- Sounds -->
-<audio id="beep" src="https://www.myinstants.com/media/sounds/windows-error.mp3"></audio>
-<audio id="boom" src="https://www.myinstants.com/media/sounds/vine-boom.mp3"></audio>
+<audio id="beep" preload="auto"
+  src="https://www.myinstants.com/media/sounds/windows-error.mp3"></audio>
+<audio id="boom" preload="auto"
+  src="https://www.myinstants.com/media/sounds/vine-boom.mp3"></audio>
 
 <script>
-  const btn = document.getElementById("openBtn");
-  const message = document.getElementById("message");
-  const meme = document.getElementById("meme");
-  const beep = document.getElementById("beep");
-  const boom = document.getElementById("boom");
-  const card = document.querySelector(".card");
+const btn = document.getElementById("openBtn");
+const message = document.getElementById("message");
+const meme = document.getElementById("meme");
+const beep = document.getElementById("beep");
+const boom = document.getElementById("boom");
+const card = document.querySelector(".card");
 
-  let timeLeft = 15;
-  let locked = true;
-  let fakeFreeze = false;
+let timeLeft = 15;
+let locked = true;
 
-  placeButtonCenter();
+const texts = ["Almost 💋","So close 😏","Nope 💀","Love harder 💔","Try again 😭"];
 
-  const texts = [
-    "Almost 💋",
-    "So close 😏",
-    "Nope 💀",
-    "Love harder 💔",
-    "Try again 😭"
-  ];
+centerBtn();
 
-  const timer = setInterval(() => {
-    timeLeft--;
-    btn.textContent =
-      texts[Math.floor(Math.random() * texts.length)] +
-      ` (${timeLeft})`;
+const timer = setInterval(() => {
+  timeLeft--;
+  btn.textContent = `${texts[Math.random()*texts.length|0]} (${timeLeft})`;
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    locked = false;
+    btn.textContent = "CLICK ME 💘";
+    btn.style.animation = "none";
+    btn.style.boxShadow = "0 0 28px #00ff99";
+  }
+}, 1000);
 
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      locked = false;
-      btn.textContent = "CLICK ME 💘";
-      btn.style.animation = "none";
-      btn.style.boxShadow = "0 0 30px #00ff99";
-    }
-  }, 1000);
-
-  document.addEventListener("mousemove", (e) => {
+["mousemove","touchstart"].forEach(evt => {
+  document.addEventListener(evt, e => {
     if (!locked) return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
 
-    const rect = btn.getBoundingClientRect();
-    const distance = Math.hypot(
-      e.clientX - (rect.left + rect.width / 2),
-      e.clientY - (rect.top + rect.height / 2)
-    );
+    const r = btn.getBoundingClientRect();
+    const d = Math.hypot(x - (r.left+r.width/2), y - (r.top+r.height/2));
+    if (d < 140) jump();
+  }, {passive:true});
+});
 
-    if (distance < 45 && !fakeFreeze) {
-      fakeFreeze = true;
-      beep.play();
-      if (navigator.vibrate) navigator.vibrate(40);
+function jump() {
+  beep.currentTime = 0;
+  beep.play().catch(()=>{});
+  navigator.vibrate?.(40);
 
-      setTimeout(() => {
-        boom.play();
-        jump();
-        fakeFreeze = false;
-      }, 220);
-      return;
-    }
+  const maxX = card.clientWidth - btn.offsetWidth;
+  const maxY = card.clientHeight - btn.offsetHeight - 30;
 
-    if (distance < 130) jump();
-  });
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + 60 + "px";
+}
 
-  function jump() {
-    const paddingTop = 80;   // avoid header
-    const paddingBottom = 40;
+function centerBtn() {
+  btn.style.left = (card.clientWidth - btn.offsetWidth)/2 + "px";
+  btn.style.top = "65%";
+}
 
-    const maxX = card.clientWidth - btn.offsetWidth;
-    const maxY = card.clientHeight - btn.offsetHeight - paddingBottom;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * (maxY - paddingTop) + paddingTop;
-
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
+btn.onclick = () => {
+  if (!locked) {
+    btn.remove();
+    message.style.display = "block";
+    meme.style.display = "block";
+    boom.play().catch(()=>{});
+    navigator.vibrate?.([120,60,120,200]);
+    hearts();
   }
+};
 
-  function placeButtonCenter() {
-    btn.style.left =
-      (card.clientWidth - btn.offsetWidth) / 2 + "px";
-    btn.style.top = "65%";
+function hearts() {
+  for (let i=0;i<28;i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = "💖";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = 16 + Math.random()*24 + "px";
+    h.style.animationDuration = 4 + Math.random()*3 + "s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
   }
+}
 
-  btn.addEventListener("click", () => {
-    if (!locked) {
-      btn.style.display = "none";
-      message.style.display = "block";
-      meme.style.display = "block";
-      boom.play();
-      if (navigator.vibrate) navigator.vibrate([120, 60, 120, 60, 200]);
-      hearts();
-    }
-  });
-
-  function hearts() {
-    for (let i = 0; i < 25; i++) {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.innerText = "💖";
-      h.style.left = Math.random() * 100 + "vw";
-      h.style.fontSize = Math.random() * 24 + 16 + "px";
-      h.style.animationDuration = Math.random() * 3 + 4 + "s";
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 6000);
-    }
-  }
-
-  window.addEventListener("resize", placeButtonCenter);
+window.onresize = centerBtn;
 </script>
 
 </body>
 </html>
+
